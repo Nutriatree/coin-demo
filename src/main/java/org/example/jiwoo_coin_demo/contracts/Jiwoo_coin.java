@@ -65,39 +65,31 @@ public class Jiwoo_coin extends Contract {
 
     public static final CustomError ERC20INSUFFICIENTALLOWANCE_ERROR = new CustomError("ERC20InsufficientAllowance", 
             Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}));
-    ;
 
     public static final CustomError ERC20INSUFFICIENTBALANCE_ERROR = new CustomError("ERC20InsufficientBalance", 
             Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}));
-    ;
 
     public static final CustomError ERC20INVALIDAPPROVER_ERROR = new CustomError("ERC20InvalidApprover",
             List.<TypeReference<?>>of(new TypeReference<Address>() {
             }));
-    ;
 
     public static final CustomError ERC20INVALIDRECEIVER_ERROR = new CustomError("ERC20InvalidReceiver",
             List.<TypeReference<?>>of(new TypeReference<Address>() {
             }));
-    ;
 
     public static final CustomError ERC20INVALIDSENDER_ERROR = new CustomError("ERC20InvalidSender",
             List.<TypeReference<?>>of(new TypeReference<Address>() {
             }));
-    ;
 
     public static final CustomError ERC20INVALIDSPENDER_ERROR = new CustomError("ERC20InvalidSpender",
             List.<TypeReference<?>>of(new TypeReference<Address>() {
             }));
-    ;
 
     public static final Event APPROVAL_EVENT = new Event("Approval", 
             Arrays.<TypeReference<?>>asList(new TypeReference<Address>(true) {}, new TypeReference<Address>(true) {}, new TypeReference<Uint256>() {}));
-    ;
 
     public static final Event TRANSFER_EVENT = new Event("Transfer", 
             Arrays.<TypeReference<?>>asList(new TypeReference<Address>(true) {}, new TypeReference<Address>(true) {}, new TypeReference<Uint256>() {}));
-    ;
 
     @Deprecated
     protected Jiwoo_coin(String contractAddress, Web3j web3j, Credentials credentials,
