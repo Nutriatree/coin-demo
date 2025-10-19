@@ -71,20 +71,24 @@ public class Jiwoo_coin extends Contract {
             Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}, new TypeReference<Uint256>() {}, new TypeReference<Uint256>() {}));
     ;
 
-    public static final CustomError ERC20INVALIDAPPROVER_ERROR = new CustomError("ERC20InvalidApprover", 
-            Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+    public static final CustomError ERC20INVALIDAPPROVER_ERROR = new CustomError("ERC20InvalidApprover",
+            List.<TypeReference<?>>of(new TypeReference<Address>() {
+            }));
     ;
 
-    public static final CustomError ERC20INVALIDRECEIVER_ERROR = new CustomError("ERC20InvalidReceiver", 
-            Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+    public static final CustomError ERC20INVALIDRECEIVER_ERROR = new CustomError("ERC20InvalidReceiver",
+            List.<TypeReference<?>>of(new TypeReference<Address>() {
+            }));
     ;
 
-    public static final CustomError ERC20INVALIDSENDER_ERROR = new CustomError("ERC20InvalidSender", 
-            Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+    public static final CustomError ERC20INVALIDSENDER_ERROR = new CustomError("ERC20InvalidSender",
+            List.<TypeReference<?>>of(new TypeReference<Address>() {
+            }));
     ;
 
-    public static final CustomError ERC20INVALIDSPENDER_ERROR = new CustomError("ERC20InvalidSpender", 
-            Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+    public static final CustomError ERC20INVALIDSPENDER_ERROR = new CustomError("ERC20InvalidSpender",
+            List.<TypeReference<?>>of(new TypeReference<Address>() {
+            }));
     ;
 
     public static final Event APPROVAL_EVENT = new Event("Approval", 
@@ -143,7 +147,7 @@ public class Jiwoo_coin extends Contract {
     }
 
     public Flowable<ApprovalEventResponse> approvalEventFlowable(EthFilter filter) {
-        return web3j.ethLogFlowable(filter).map(log -> getApprovalEventFromLog(log));
+        return web3j.ethLogFlowable(filter).map(Jiwoo_coin::getApprovalEventFromLog);
     }
 
     public Flowable<ApprovalEventResponse> approvalEventFlowable(DefaultBlockParameter startBlock,
@@ -174,12 +178,12 @@ public class Jiwoo_coin extends Contract {
         typedResponse.log = log;
         typedResponse.from = (String) eventValues.getIndexedValues().get(0).getValue();
         typedResponse.to = (String) eventValues.getIndexedValues().get(1).getValue();
-        typedResponse.value = (BigInteger) eventValues.getNonIndexedValues().get(0).getValue();
+        typedResponse.value = (BigInteger) eventValues.getNonIndexedValues().getFirst().getValue();
         return typedResponse;
     }
 
     public Flowable<TransferEventResponse> transferEventFlowable(EthFilter filter) {
-        return web3j.ethLogFlowable(filter).map(log -> getTransferEventFromLog(log));
+        return web3j.ethLogFlowable(filter).map(Jiwoo_coin::getTransferEventFromLog);
     }
 
     public Flowable<TransferEventResponse> transferEventFlowable(DefaultBlockParameter startBlock,
@@ -192,8 +196,9 @@ public class Jiwoo_coin extends Contract {
     public RemoteFunctionCall<BigInteger> allowance(String owner, String spender) {
         final Function function = new Function(FUNC_ALLOWANCE, 
                 Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, owner), 
-                new org.web3j.abi.datatypes.Address(160, spender)), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+                new org.web3j.abi.datatypes.Address(160, spender)),
+                List.<TypeReference<?>>of(new TypeReference<Uint256>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
@@ -207,9 +212,10 @@ public class Jiwoo_coin extends Contract {
     }
 
     public RemoteFunctionCall<BigInteger> balanceOf(String account) {
-        final Function function = new Function(FUNC_BALANCEOF, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, account)), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+        final Function function = new Function(FUNC_BALANCEOF,
+                List.<Type>of(new Address(160, account)),
+                List.<TypeReference<?>>of(new TypeReference<Uint256>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
@@ -223,9 +229,10 @@ public class Jiwoo_coin extends Contract {
     }
 
     public RemoteFunctionCall<BigInteger> decimals() {
-        final Function function = new Function(FUNC_DECIMALS, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint8>() {}));
+        final Function function = new Function(FUNC_DECIMALS,
+                List.<Type>of(),
+                List.<TypeReference<?>>of(new TypeReference<Uint8>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
@@ -239,23 +246,26 @@ public class Jiwoo_coin extends Contract {
     }
 
     public RemoteFunctionCall<String> name() {
-        final Function function = new Function(FUNC_NAME, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}));
+        final Function function = new Function(FUNC_NAME,
+                List.<Type>of(),
+                List.<TypeReference<?>>of(new TypeReference<Utf8String>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
 
     public RemoteFunctionCall<String> symbol() {
-        final Function function = new Function(FUNC_SYMBOL, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {}));
+        final Function function = new Function(FUNC_SYMBOL,
+                List.<Type>of(),
+                List.<TypeReference<?>>of(new TypeReference<Utf8String>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
 
     public RemoteFunctionCall<BigInteger> totalSupply() {
-        final Function function = new Function(FUNC_TOTALSUPPLY, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+        final Function function = new Function(FUNC_TOTALSUPPLY,
+                List.<Type>of(),
+                List.<TypeReference<?>>of(new TypeReference<Uint256>() {
+                }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
